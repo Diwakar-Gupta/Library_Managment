@@ -45,7 +45,35 @@
 }
 </style>
 
-<body>
+<body style="color:#1c252d;background-color: #dfe4df;" >
+
+{% if error %}
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#error').modal('show');
+    });
+</script>
+
+  <div class="modal" id="error">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+
+        <!-- Modal body -->
+        <div class="modal-body">
+<h3 style="color:red" >{{error}}</h3>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endif %}
 
 <div class="col">
 

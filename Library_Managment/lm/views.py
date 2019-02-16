@@ -22,9 +22,9 @@ def issueThis(request,userpk,bookpk):
         if book.currently_issued:
             return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':book.pk}))
         if user.bookCount >= sett.maxBookForStudent if user.is_student else sett.maxBookForFaculty:
-            return StudentDetail(request,user.pk,context={'popup':'Already Have Books'})
+            return StudentDetail(request,user.pk,context={'error':'Already Have Books'})
         if not user.exist :
-            return StudentDetail(request, user.pk, context={'popup': 'User left Colledge'})
+            return StudentDetail(request, user.pk, context={'error': 'User left Colledge'})
     except Http404:
         return HttpResponse(render(request,'lm/error.html',context={'error':"can't issue book problem occured "}))
     else :
@@ -126,7 +126,7 @@ def payable(request,userid):
 
 
 def Index(request):
-    return HttpResponse(render(request,'lm/index.html'))
+    return HttpResponse(render(request,'lm/error.html'))
 
 
 class PendingBooks(generic.ListView):

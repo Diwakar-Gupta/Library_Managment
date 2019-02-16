@@ -63,7 +63,7 @@
 
 
   <div class="col" data-toggle="modal" data-target="#addb">
-    <img src="{% static 'svg/book.svg' %}">
+    <img src="{% static 'svg/diff-added.svg' %}">
   </div>
 
 
@@ -83,7 +83,7 @@
               {% csrf_token %}
 
               <input type="hidden"  name="bookpk" value="{{ book.pk }}" ></input>
-              <input class="form-control mr-sm-2" type="number" required="required" maxlength="7" name="userroll" placeholder="Roll number" >
+              <input class="form-control mr-sm-2" type="number" required="required" autofocus="autofocus" maxlength="7" name="userroll" placeholder="Roll number" >
 
           </form>
         </div>
