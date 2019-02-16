@@ -20,7 +20,9 @@ def issueThis(request,userpk,bookpk):
         user = get_object_or_404(Student,pk = userpk)
         book = get_object_or_404(Book, pk=bookpk)
         if book.currently_issued:
-            return HttpResponse(render('lm/error.html',context={'error':'book is already issued'}))
+            return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':book.pk}))
+        if user.bookCount >= sett.maxBookForStudent if user.is_student else sett.maxBookForFaculty:
+            return StudentDetail(request,user.pk,context={'maxBookPop':True})
     except Http404:
         #404 book not found
         pass
@@ -29,19 +31,35 @@ def issueThis(request,userpk,bookpk):
         days = sett.maxDelayDayStudent if user.is_student else sett.maxDelayDayFaculty
         iss.return_time = iss.issue_time.date()+datetime.timedelta(days = days)
         book.currently_issued = True
-        book.user = user
+        user.bookCount += 1
+        user.save()
         book.save()
         iss.save()
         return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':user.pk}))
 
 
-
 def issuee(request):
     print(request.POST)
-    userpk = request.POST.get('userpk') if 'userpk' in request.POST else  request.POST.get('userroll').pk
-    bookpk= request.POST.get('bookpk') if 'bookpk' in request.POST else  request.POST.get('identity') if 'identity' in request.POST else Book.objects.get(barcode = request.POST.get('barcode')).pk
-    return issueThis(request,userpk,bookpk)
-
+    dic = request.POST
+    userpk = -1
+    bookpk = -1
+    try :
+        userpk = dic.get('userpk') if 'userpk' in dic else get_object_or_404(Student,roll=dic.get('userroll')).pk if 'userroll' in dic else -1
+        bookpk = dic.get('bookpk') if 'bookpk' in dic else get_object_or_404(Book,identity=dic.get('identity')).pk if 'identity' in dic else get_object_or_404(Book,barcode=dic.get('barcode')).pk if 'barcode' in dic else -1
+    except Http404:
+        if userpk == -1:
+            return HttpResponse(
+                render(request, 'lm/error.html', context={'error': 'user does not exist', 'createUser': True}))
+        if bookpk == -1:
+            return HttpResponse(render(request, 'lm/error.html', context={'error': 'book does not exist', 'createBook': True}))
+    else :
+        if userpk == -1:
+            return HttpResponse(
+                render(request, 'lm/error.html', context={'error': 'user does not exist', 'createUser': True}))
+        if bookpk == -1:
+            return HttpResponse(
+                render(request, 'lm/error.html', context={'error': 'book does not exist', 'createBook': True}))
+        return issueThis(request, userpk, bookpk)
 
 
 def returnbook(request,issue_id):
@@ -57,7 +75,10 @@ def returnbook(request,issue_id):
     info.is_returned = True
     info.return_time = datetime.datetime.now()
     book.currently_issued = False
-    book.user = None
+    user.bookCount -= 1
+    if user.bookCount <0:
+        user.bookCount = 0
+    user.save()
     info.save()
     book.save()
     return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':user.pk}))
@@ -83,19 +104,18 @@ def searchUser(request):
         return HttpResponseRedirect(reverse('lm:user', kwargs={'userid': user.pk}))
 
 
-def StudentDetail(request,userid):
+def StudentDetail(request,userid,context={}):
     try :
         stud = get_object_or_404(Student,pk = userid)
     except Http404:
         #404 error
         pass
     else:
-        try:
-            books = [information(b, libSetting.daysLeft(b)) for b in stud.Issue_set.all().filter(is_returned=False)]
-        except AttributeError:
-            return render(request, 'lm/userDetail.html', context={'student': stud, 'books': []})
-        else :
-            return render(request,'lm/userDetail.html',context={'student':stud,'books':books})
+
+            books = [information(b, libSetting.daysLeft(b)) for b in stud.issue_set.all().filter(is_returned=False)]
+            context['books'] = books
+            context['student'] = stud
+            return render(request,'lm/userDetail.html',context)
 
 
 def payable(request,userid):

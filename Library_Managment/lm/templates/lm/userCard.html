@@ -51,10 +51,6 @@
                 <input value="{{student.image_path}}" name="name" type="ImageField" id="inputImage" class="form-control" placeholder="Name" required="" autofocus="">
               </div>
 
-              <!--<div class="form-label-group">
-                <label for="inputisstudent">Is Student</label>
-                <input value="{{student.is_student}}" name="isstudent" type="checkbox" id="inputisstudent" class="form-control" placeholder="Name" required="" autofocus="">
-              </div>-->
 
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Update</button>
             </form>
@@ -96,7 +92,7 @@
               {% csrf_token %}
 
               <input type="hidden"  name="userpk" value="{{ student.pk }}" ></input>
-              <input class="form-control mr-sm-2" type="number" name="identity" placeholder="Book ID" >
+              <input class="form-control mr-sm-2" type="number" required="required" maxlength="7" name="identity" placeholder="Book ID" >
 
           </form>
         </div>

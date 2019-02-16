@@ -23,6 +23,7 @@ class Student(models.Model):
     is_student = models.BooleanField(default=True,editable=True)
     is_active = models.BooleanField(default=True,null=False,editable=True)
     exist = models.BooleanField(default=True)
+    bookCount = models.IntegerField(default=0)
 
     def get_absolute_url(self):
         return reverse('lm:user', kwargs={'userid': self.pk})
@@ -45,4 +46,4 @@ class Issue(models.Model):
     issue_time = models.DateTimeField(auto_now_add=True,blank=True,editable=True)
     is_returned = models.BooleanField(default=False,editable=True)
     return_time = models.DateTimeField(auto_now_add=False,blank=True,editable=True,null=True)
-
+    mailSend = models.BooleanField(default=False)
