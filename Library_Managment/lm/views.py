@@ -6,6 +6,7 @@ from django.http import HttpResponse , HttpResponseRedirect
 from django.http.response import Http404
 import datetime
 
+
 sett = LibrarySettings.objects.all()[0]
 
 
@@ -126,7 +127,7 @@ def payable(request,userid):
 
 
 def Index(request):
-    return HttpResponse(render(request,'lm/error.html'))
+    return HttpResponse(render(request,'lm/index.html'))
 
 
 class PendingBooks(generic.ListView):
