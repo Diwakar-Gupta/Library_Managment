@@ -2,11 +2,10 @@
     <div class="card" style="width:50%;">
   <img class="card-img-top" src="{{student.image_path}}" alt="Card image" style="width:100%;margin-bottom:2">
   <div class="card-body">
-    <h3 class="card-title" style="margin-top:0;">{{student.name}}
-    {% if not user.exist %}
+    <h3 class="card-title" style="margin-top:0;">{{student.name}}    </h3>
+  <!--  {% if not user.exist %}
       <h5 style="color:red">Left College</h5>
-      {% endif %}
-    </h3>
+    {% endif %}-->
     <h4 style="color:red" >{% if not student.is_active %}Deactivated{% endif %}</h4>
     <h5>Roll {{student.roll}}</h5>
     {% if student.payable_amount %}<h5>Fine</h5>{% if student.payable_amount %}<a href="{% url 'lm:payable' student.pk %}"><h4> {{student.payable_amount}}</h4></a>
