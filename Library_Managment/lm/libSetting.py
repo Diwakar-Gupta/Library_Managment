@@ -17,10 +17,6 @@ def getday(b):
 
 
 def daysLeft(r):
-    if r.is_returned:
+#    if r.is_returned:
         d = r.return_time.date() - r.issue_time.date()
         return d.days
-    else :
-        d = datetime.date.today() - r.issue_time.date()
-        return d.days
-

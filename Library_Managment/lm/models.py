@@ -34,6 +34,7 @@ class Book(models.Model):
     barcode = models.IntegerField(default=0,blank=True,null=True,editable=True)
     classification_number = models.IntegerField(default=0,null=True,blank=True,editable=True)
     currently_issued = models.BooleanField(default=False,editable=True,null=False,blank=False)
+    active = models.BooleanField(default=True,editable=True)
 
     def get_absolute_url(self):
         return reverse('lm:book', kwargs={'pk': self.id})

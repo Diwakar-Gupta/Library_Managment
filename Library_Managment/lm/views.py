@@ -24,8 +24,7 @@ def issueThis(request,userpk,bookpk):
         if user.bookCount >= sett.maxBookForStudent if user.is_student else sett.maxBookForFaculty:
             return StudentDetail(request,user.pk,context={'maxBookPop':True})
     except Http404:
-        #404 book not found
-        pass
+        return HttpResponse(render(request,'lm/error.html',context={'error':"can't issue book problem occured "}))
     else :
         iss = Issue(user = user,book = book ,is_returned = False ,issue_time=datetime.datetime.now())
         days = sett.maxDelayDayStudent if user.is_student else sett.maxDelayDayFaculty
@@ -124,8 +123,11 @@ def payable(request,userid):
     return render(request,'lm/payable.html',context={'issuesday':all,'name':student.name,'roll':student.roll})
 
 
+def Index(request):
+    return HttpResponse(render(request,'lm/index.html'))
 
-class IndexView(generic.ListView):
+
+class PendingBooks(generic.ListView):
     context_object_name = 'pendingIssue'
 
     def get_queryset(self):
@@ -147,6 +149,10 @@ class BookDetail(generic.DetailView):
 
 def updateStudent(request):
     return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':request.POST.get('roll')}))
+
+
+def updateBook(request):
+    return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':request.POST.get('pk')}))
 
 class updateBook(generic.UpdateView):
     model = Book

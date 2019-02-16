@@ -1,13 +1,54 @@
+
 {% extends 'lm/base.html' %}
 
-{% block title %}index page title{% endblock %}
-
+{% block title %}Home{% endblock %}
 
 {% block body %}
 
-book id:{{ book.identity }}<br>
-Barcode: {{ book.barcode }}<br>
-is_issued :{{ book.currently_issued }}<br>
-user name : {{ book.user.name }}<br>
+<div class="row">
+
+<div class="col">
+
+    {% include 'lm/bookCard.html' %}
+
+
+</div>
+
+
+
+  <div class="col">
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Roll</th>
+        <th>Issue Date</th>
+        <th>return</th>
+      </tr>
+    </thead>
+     <tbody id="myTable" >
+
+
+     {% for issue in book.issue_set.all %}
+{% if not issue.is_returned %}
+      <tr>
+          <td>{{issue.user.name }}</td>
+          <td><a href="{% url 'lm:user' issue.user.pk %}" >{{issue.user.roll }}</a></td>
+          <td>{{issue.issue_time }}</td>
+        <td>{{ issue.is_returned }}</td>
+        <td><a href="{% url 'lm:return' issue.pk %}" class="btn btn-primary">Return</a></td>
+      </tr>
+     {% endif %}
+{% endfor %}
+
+
+
+     </tbody>
+</table>
+
+  </div>
+
+</div>
 
 {% endblock %}

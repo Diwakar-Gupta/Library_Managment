@@ -54,6 +54,9 @@
         <nav  class="navbar navbar-expand-md bg-dark navbar-dark fixed" >
 
   <a class="navbar-brand" href="#">Navbar</a>
+            <ul class="navbar-nav ml-auto">
+
+            </ul>
 
   <!-- <span class="navbar-toggler-icon"></span> -->
 
@@ -82,7 +85,8 @@
     <div class="col">
         <div id="mySidenav" style="width : 230px" class="sidenav">
  <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"></a>-->
-  <a href="{% url 'lm:index' %}">Pending Books</a>
+  <a href="{% url 'lm:index' %}">Home</a>
+  <a href="{% url 'lm:pendingbooks' %}">Pending Books</a>
   <a href="{% url 'lm:pendingfines' %}">Pending Fines</a>
   <a href="#">Clients</a>
   <a href="#">Contact</a>
