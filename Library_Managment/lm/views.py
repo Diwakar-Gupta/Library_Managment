@@ -217,13 +217,50 @@ class BookDetail(generic.DetailView):
 
 
 def updateStudent(request):
-    return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':request.POST.get('roll')}))
+    dic = request.POST
+    try :
+        print(dic)
+        roll = dic.get('roll')
+        s=get_object_or_404(Student,roll=roll)
+        context=['er':'eyyr',]
+        name = dic.get('name') if 'name' in dic else ''
+        if name:
+            s.name = name
+        else:
+            context['error'] = 'Name is not changed'
+        image_path = dic.get('image') if 'image' in dic else ''
+        if image_path:
+            s.image_path = image_path
+        else:
+            context['error'] += '\nImage is not changed'
+        email = dic.get('email') if 'email' in dic else ''
+        if email:
+            s.email = email
+        else:
+            context['error'] += '\nemail is not changed'
+        is_student = dic.get('is_student') if 'is_student' in dic else ''
+        if is_student:
+            s.is_student = is_student
+        else:
+            context['error'] += '\nis_student is not changed'
+        is_active = dic.get('is_active') if 'is_active' in dic else ''
+        if is_active:
+            s.is_active = is_active
+        else:
+            context['error'] += '\nis_active is not changed'
+        exist = True if 'exist' in dic and 'on' == dic.get('exist') else False
+        if exist:
+            s.exist = exist
+        else:
+            context['error'] += '\nexist is not changed'
+        return HttpResponseRedirect(reverse('lm:user', kwargs={'userid': s.pk}))
+
+    except Http404:
+        return HttpResponse(render(request,'lm/error.html',context={'error':'user does not exist'}))
+
+    return HttpResponse(render(request,'lm/error.html',context=context))
 
 
 def updateBook(request):
     return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':request.POST.get('pk')}))
-
-class updateBook(generic.UpdateView):
-    model = Book
-    fields = ['barcode','classification_number']
 

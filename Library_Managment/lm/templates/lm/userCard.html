@@ -51,10 +51,9 @@
 
 
 
-                 <div class="form-label-group">
-                   <label for="inputEmail">Email address</label>
+              <div class="form-label-group">
                 <input type="email" name="email" value="{{ student.email }}" id="inputEmail"  class="form-control" placeholder="Email address" >
-
+                <label for="inputEmail">Email address</label>
               </div>
 
 
@@ -64,7 +63,7 @@
               </div>
 
               <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" name="isstudent" checked={% if student.is_active %}"checked"{%else%}"unchecked"{%endif%} class="custom-control-input" id="customCheck2">
+                <input type="checkbox" name="isactive" checked={% if student.is_active %}"checked"{%else%}"unchecked"{%endif%} class="custom-control-input" id="customCheck2">
                 <label class="custom-control-label" for="customCheck2">Active</label>
               </div>
 
