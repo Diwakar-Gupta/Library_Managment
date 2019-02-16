@@ -139,10 +139,13 @@ def profileForm(request,who):
 def addUser(request):
     try :
         dic = request.POST
+        print(dic)
         name = dic.get('name') if 'name' in dic else ''
         roll = dic.get('roll')
         email = dic.get('email')
         image = dic.get('image') if 'image' in dic else '../static/lm/anon.png'
+        if not image:
+            image='../static/lm/anon.png'
         student = False if 'isstudent'in dic and 'off'== dic.get('isstudent')  else True
         active = False if 'inactive'in dic and 'off'== dic.get('inactive')  else True
         exist = False if 'exist'in dic and 'off'== dic.get('exist')  else True
@@ -150,8 +153,7 @@ def addUser(request):
         s=get_object_or_404(Student,roll=roll)
         return StudentDetail(request,userid=s.pk,context={'error':'user already exists'})
     except Http404:
-        s = Student(name=name, roll=roll, image_path=image,email=email, is_student=student, is_active=active, exist=exist,
-                    bookCount=0, payable_amount=0)
+        s = Student(name=name, roll=roll, image_path=image,email=email, is_student=student, is_active=active, exist=exist,bookCount=0, payable_amount=0)
         s.save()
         return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':s.pk}))
     except :
