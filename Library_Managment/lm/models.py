@@ -18,7 +18,7 @@ class Student(models.Model):
     name = models.CharField(max_length=30,default=' ',editable=True)
     roll = models.IntegerField(editable=False,primary_key=True)
     image_path = models.ImageField(default='../static/lm/anon.png',editable=True)
-    mobile_number = models.IntegerField(default=0000000000,editable=True)
+    email = models.EmailField(blank=True,editable=True)
     payable_amount = models.IntegerField(default=0,editable=True)
     is_student = models.BooleanField(default=True,editable=True)
     is_active = models.BooleanField(default=True,null=False,editable=True)

@@ -18,6 +18,11 @@ urlpatterns = [
     path('issuebook/', views.issuee, name='issue'),
     path('return/<int:issue_id>', views.returnbook, name='return'),
 
+    path('addUser',views.addUser,name='adduser'),
+    path('addBook',views.addBook,name='addbook'),
+
+    path('add/<int:who>',views.profileForm,name='create'),
+
     path('update/user/',views.updateStudent,name='updateuser'),
     path('update/book/',views.updateBook,name='updatebook'),
 ]

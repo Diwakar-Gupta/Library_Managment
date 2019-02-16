@@ -127,7 +127,55 @@ def payable(request,userid):
 
 
 def Index(request):
-    return HttpResponse(render(request,'lm/index.html'))
+    return HttpResponse(render(request,'lm/Form.html',context={'user':True}))
+
+
+def profileForm(request,who):
+    user = True if who else False
+
+    return HttpResponse(render(request,'lm/Form.html',context={'user':user}))
+
+
+def addUser(request):
+    try :
+        dic = request.POST
+        name = dic.get('name') if 'name' in dic else ''
+        roll = dic.get('roll')
+        email = dic.get('email')
+        image = dic.get('image') if 'image' in dic else '../static/lm/anon.png'
+        student = False if 'isstudent'in dic and 'off'== dic.get('isstudent')  else True
+        active = False if 'inactive'in dic and 'off'== dic.get('inactive')  else True
+        exist = False if 'exist'in dic and 'off'== dic.get('exist')  else True
+
+        s=get_object_or_404(Student,roll=roll)
+        return StudentDetail(request,userid=s.pk,context={'error':'user already exists'})
+    except Http404:
+        s = Student(name=name, roll=roll, image_path=image,email=email, is_student=student, is_active=active, exist=exist,
+                    bookCount=0, payable_amount=0)
+        s.save()
+        return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':s.pk}))
+    except :
+        return HttpResponse(render(request,'lm/error.html',context={'error':'Cant create Profile'}))
+
+
+
+def addBook(request):
+    try :
+        dic = request.POST
+
+        identity = dic.get('identity')
+        barcode = dic.get('barcode') if 'barcode' in dic else 0
+        classification_number = dic.get('classification_number') if 'classification_number' in dic else 0
+        active = dic.get('isactive') if 'isactive' in dic else True
+
+        s=get_object_or_404(Book,identity=identity)
+        return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':s.pk}))
+    except Http404:
+        s = Student(identity=identity,barcode=barcode,classification_number=classification_number, is_active=active)
+        s.save()
+        return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':s.pk}))
+    except :
+        return HttpResponse(render(request,'lm/error.html',context={'error':'Cant create Book Profile'}))
 
 
 class PendingBooks(generic.ListView):
