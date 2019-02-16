@@ -58,17 +58,17 @@
 
 
               <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" name="isstudent" checked={% if student.is_student %}"checked"{%else%}"unchecked"{%endif%} class="custom-control-input" id="customCheck1">
+                <input type="checkbox" name="isstudent" {% if student.is_student %} checked="checked"{%endif%} class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Student</label>
               </div>
 
               <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" name="isactive" checked={% if student.is_active %}"checked"{%else%}"unchecked"{%endif%} class="custom-control-input" id="customCheck2">
+                <input type="checkbox" name="isactive" {% if student.is_active %} checked="checked"{%endif%} class="custom-control-input" id="customCheck2">
                 <label class="custom-control-label" for="customCheck2">Active</label>
               </div>
 
               <div class="form-label-group">
-                <input name="name" type="file" accept="image/*" id="inputImage" class="form-control" placeholder="Name"  autofocus="">
+                <input name="image" type="file" accept="image/*" id="inputImage" class="form-control" placeholder="Name"  autofocus="">
                  <label for="inputImage">Image</label>
               </div>
 
