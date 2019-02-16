@@ -22,7 +22,9 @@ def issueThis(request,userpk,bookpk):
         if book.currently_issued:
             return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':book.pk}))
         if user.bookCount >= sett.maxBookForStudent if user.is_student else sett.maxBookForFaculty:
-            return StudentDetail(request,user.pk,context={'maxBookPop':True})
+            return StudentDetail(request,user.pk,context={'popup':'Already Have Books'})
+        if not user.exist :
+            return StudentDetail(request, user.pk, context={'popup': 'User left Colledge'})
     except Http404:
         return HttpResponse(render(request,'lm/error.html',context={'error':"can't issue book problem occured "}))
     else :
