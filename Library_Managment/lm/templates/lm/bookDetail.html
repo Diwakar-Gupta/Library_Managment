@@ -1,0 +1,13 @@
+{% extends 'lm/base.html' %}
+
+{% block title %}index page title{% endblock %}
+
+
+{% block body %}
+
+book id:{{ book.identity }}<br>
+Barcode: {{ book.barcode }}<br>
+is_issued :{{ book.currently_issued }}<br>
+user name : {{ book.user.name }}<br>
+
+{% endblock %}

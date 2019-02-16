@@ -1,0 +1,54 @@
+
+{% extends 'lm/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col">
+
+    {% include 'lm/userCard.html' %}
+
+
+</div>
+
+
+
+
+
+  <div class="col">
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Book ID</th>
+        <th>Issue Date</th>
+        <th>Days Left</th>
+      </tr>
+    </thead>
+     <tbody id="myTable" >
+
+
+     {% for issue in books %}
+
+      <tr>
+          <td><a href="{% url 'lm:book' issue.issue.book.pk %}" >{{issue.issue.book.identity }}</a></td>
+          <td>{{issue.issue.issue_time }}</td>
+          <td>{{issue.dayLeft}}</td>
+        <td>{{ issue.is_returned }}</td>
+        <td><a href="{% url 'lm:return' issue.issue.pk %}" class="btn btn-primary">Return</a></td>
+      </tr>
+{% endfor %}
+
+
+
+     </tbody>
+</table>
+
+  </div>
+
+</div>
+
+{% endblock %}

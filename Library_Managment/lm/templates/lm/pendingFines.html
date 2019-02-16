@@ -1,0 +1,50 @@
+{% extends 'lm/base.html' %}
+
+{% block title %}fines{% endblock %}
+
+
+{% block body %}
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+
+ <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Roll</th>
+        <th>Book ID</th>
+        <th>Issue Date</th>
+        <th>Return Day</th>
+        <th>Extended Days</th>
+      </tr>
+    </thead>
+     <tbody id="myTable" >
+{% for issue in pendingIssue %}
+
+      <tr>
+          <td>{{issue.issue.user.name }}</td>
+          <td><a href="{% url 'lm:user' issue.issue.user.pk %}" >{{issue.issue.user.roll }}</a></td>
+          <td><a href="{% url 'lm:book' issue.issue.book.pk %}" >{{issue.issue.book.identity }}</a></td>
+        <td>{{issue.issue.issue_time }}</td>
+        <td>{{issue.issue.return_time }}</td>
+        <td>{{ issue.dayLeft }}</td>
+      </tr>
+{% endfor %}
+
+     </tbody>
+  </table>
+
+
+{% endblock %}

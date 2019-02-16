@@ -1,0 +1,135 @@
+{% load static %}
+    <div class="card" style="width:50%;">
+  <img class="card-img-top" src="{{student.image_path}}" alt="Card image" style="width:100%;margin-bottom:2">
+  <div class="card-body">
+    <h3 class="card-title" style="margin-top:0;">{{student.name}}</h3>
+    <h4 style="color:red" >{% if not student.is_active %}Deactivated{% endif %}</h4>
+    <h5>Roll {{student.roll}}</h5>
+    <h5>Payable Amount</h5>{% if student.payable_amount %}<a href="{% url 'lm:payable' student.pk %}"><h4> {{student.payable_amount}}</h4></a>
+      {% else %}<h4>0</h4>{% endif %}
+
+
+            <div class="row">
+
+
+  <div class="col" data-toggle="modal" data-target="#edit">
+    <img src="{% static 'svg/tools.svg' %}">
+  </div>
+
+
+  <div class="modal" id="edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Profile</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card-body">
+            <h5 class="card-title text-center">Update User</h5>
+            <form class="form-signin" action="{% url 'lm:updateuser' %}" method="post" >
+              {% csrf_token %}
+
+              <input type="hidden"  name="roll" value="{{ student.roll }}" ></input>
+
+              <div class="form-label-group">
+                <label for="inputname">Name</label>
+                <input value="{{student.name}}" name="name" type="text" id="inputname" class="form-control" placeholder="Name" required="" autofocus="">
+              </div>
+
+              <div class="form-label-group">
+                <label for="inputEmail">Email address</label>
+                <input value="email.com" name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+              </div>
+
+              <div class="form-label-group">
+                <label for="inputImage">Image</label>
+                <input value="{{student.image_path}}" name="name" type="ImageField" id="inputImage" class="form-control" placeholder="Name" required="" autofocus="">
+              </div>
+
+              <!--<div class="form-label-group">
+                <label for="inputisstudent">Is Student</label>
+                <input value="{{student.is_student}}" name="isstudent" type="checkbox" id="inputisstudent" class="form-control" placeholder="Name" required="" autofocus="">
+              </div>-->
+
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Update</button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+            {% if student.is_active %}
+
+
+  <div class="col" data-toggle="modal" data-target="#addb">
+    <img src="{% static 'svg/book.svg' %}">
+  </div>
+
+
+  <div class="modal" id="addb">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Issue Book</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form  action="{% url 'lm:issue' %}" method="post" >
+              {% csrf_token %}
+
+              <input type="hidden"  name="userpk" value="{{ student.pk }}" ></input>
+              <input class="form-control mr-sm-2" type="number" name="identity" placeholder="Book ID" >
+
+          </form>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+      {% endif %}
+
+                <div class="col" >
+    {% if student.is_active %} <img src="{% static 'svg/check.svg' %}">
+      {% else %}  <img src="{% static 'svg/circle-slash.svg' %}">
+      {% endif %}
+  </div>
+
+</div>
+
+
+
+
+
+
+  <!-- The Modal -->
+
+
+  </div>
+
+    </div>
