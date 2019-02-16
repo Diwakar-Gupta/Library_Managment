@@ -18,6 +18,9 @@ urlpatterns = [
     path('issuebook/', views.issuee, name='issue'),
     path('return/<int:issue_id>', views.returnbook, name='return'),
 
+    path('Bookform',views.addUserform,name='bookform'),
+    path('Userform',views.addBookform,name='userform'),
+
     path('addUser',views.addUser,name='adduser'),
     path('addBook',views.addBook,name='addbook'),
 

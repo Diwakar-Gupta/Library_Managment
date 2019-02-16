@@ -127,13 +127,21 @@ def payable(request,userid):
 
 
 def Index(request):
-    return HttpResponse(render(request,'lm/Form.html',context={'user':False}))
+    return HttpResponse(render(request,'lm/userForm.html',context={'user':False}))
 
 
 def profileForm(request,who):
     user = True if who else False
 
-    return HttpResponse(render(request,'lm/Form.html',context={'user':user}))
+    return HttpResponse(render(request,'lm/userForm.html',context={'user':user}))
+
+
+def addUserform(request):
+    return HttpResponse(render(request,'lm/userForm.html'))
+
+
+def addBookform(request):
+    return HttpResponse(render(request,'lm/bookForm.html'))
 
 
 def addUser(request):
@@ -147,7 +155,7 @@ def addUser(request):
         if not image:
             image='../static/lm/anon.png'
         student = False if 'isstudent'in dic and 'off'== dic.get('isstudent')  else True
-        active = False if 'inactive'in dic and 'off'== dic.get('inactive')  else True
+        active = False if 'isactive'in dic and 'off'== dic.get('isactive')  else True
         exist = False if 'exist'in dic and 'off'== dic.get('exist')  else True
 
         s=get_object_or_404(Student,roll=roll)
@@ -155,6 +163,10 @@ def addUser(request):
     except Http404:
         s = Student(name=name, roll=roll, image_path=image,email=email, is_student=student, is_active=active, exist=exist,bookCount=0, payable_amount=0)
         s.save()
+        if student:
+            sett.total_student += 1
+        else:
+            sett.total_staff += 1
         return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':s.pk}))
     except :
         return HttpResponse(render(request,'lm/error.html',context={'error':'Cant create Profile'}))
@@ -164,23 +176,24 @@ def addUser(request):
 def addBook(request):
     try :
         dic = request.POST
-
-        identity = dic.get('identity')
+        print(dic)
+        identity = int(dic.get('identity'))
         barcode = dic.get('barcode') if 'barcode' in dic else 0
         if not barcode:
-            barcode = 0
-
+            barcode=0
         classification_number = dic.get('classification_number') if 'classification_number' in dic else 0
-        active = dic.get('isactive') if 'isactive' in dic else True
+        if not classification_number:
+            classification_number=0
+        active = False if 'isactive'in dic and 'off'== dic.get('isactive')  else True
 
-        s=get_object_or_404(Book,identity=identity)
+        s=Book.objects.get(identity=identity)
         return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':s.pk}))
-    except Http404:
-        s = Student(identity=identity,barcode=barcode,classification_number=classification_number, is_active=active)
+    except Book.DoesNotExist:
+        s = Book(identity=identity,barcode=barcode,classification_number=classification_number,currently_issued=False, active=active)
         s.save()
+        sett.total_Books += 1
+        sett.save()
         return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':s.pk}))
-    except :
-        return HttpResponse(render(request,'lm/error.html',context={'error':'Cant create Book Profile'}))
 
 
 class PendingBooks(generic.ListView):

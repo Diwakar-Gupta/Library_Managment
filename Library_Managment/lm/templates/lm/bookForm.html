@@ -145,100 +145,46 @@ body {
 
 </head>
 <body>
-    <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
 
 
-{% if user %}
 
-      <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Create User</h5>
-             <form class="form-signin" action="{% url 'lm:adduser' %}" method="post" >
-              {% csrf_token %}
-
-
-              <div class="form-label-group">
-                <input type="text" id="inputname" name="name" placeholder="Name" ></input>
-                     <label for="inputname">Name</label>
-              </div>
-
-                 <div class="form-label-group">
-              <input type="number" id="inputroll" min="100000" max="999999" name="roll" placeholder="Roll number" required="required" ></input>
-                     <label for="inputroll">Roll number</label>
-                 </div>
-
-                 <div class="form-label-group">
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address"  autofocus="">
-                <label for="inputEmail">Email address</label>
-              </div>
-
-
-              <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" name="isstudent" checked="checked" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Student</label>
-              </div>
-
-
-              <div class="form-label-group">
-                <input name="image" type="file" accept="image/*" id="inputImage" class="form-control" placeholder="Name"  autofocus="">
-                 <label for="inputImage">Image</label>
-              </div>
-
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Create</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-    {% else %}
-
-      <div class="container">
+  <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Create Book</h5>
-            <form class="form-signin">
+            <form class="form-signin" action="{% url 'lm:addbook' %}" method="post" >
+              {% csrf_token %}
 
               <div class="form-label-group">
-                <input type="number" min="10000" max="999999" id="inputidentity" class="form-control" placeholder="Identity" required="required" autofocus="">
+                <input type="number" min="10000" max="999999" name="identity" id="inputidentity" class="form-control" placeholder="Identity" required="required" autofocus="">
                 <label for="inputidentity">Identity</label>
               </div>
 
               <div class="form-label-group">
-                <input type="number" id="inputbarcode" class="form-control" placeholder="Barcode" autofocus="">
-                <label for="inputidentity">Barcode</label>
+                <input type="number" id="inputbarcode" name="barcode" class="form-control" placeholder="Barcode" autofocus="">
+                <label for="inputbarcode">Barcode</label>
               </div>
 
               <div class="form-label-group">
-                <input type="number" min="10000" max="99999999" id="inputclassification_number" class="form-control" placeholder="Classification" autofocus="">
-                <label for="inputclassification_number">Identity</label>
+                <input type="number" min="10000" max="99999999" name="classification_number" id="inputclassification_number" class="form-control" placeholder="Classification" autofocus="">
+                <label for="inputclassification_number">Classification</label>
               </div>
 
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" checked="checked" id="customCheck1">
-                <label class="custom-control-label" name="active" for="customCheck1">Active</label>
+                <label class="custom-control-label" name="isactive" for="customCheck1">Active</label>
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-              <hr class="my-4">
-              <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
-            </form>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Create Book</button>
+
+             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-{% endif %}
 
   <script>
     // tell the embed parent frame the height of the content
@@ -254,4 +200,4 @@ body {
   </script>
 
 
-</body></html>
+</body></htm
