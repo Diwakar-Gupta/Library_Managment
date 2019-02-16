@@ -47,4 +47,6 @@ class Issue(models.Model):
     issue_time = models.DateTimeField(auto_now_add=True,blank=True,editable=True)
     is_returned = models.BooleanField(default=False,editable=True)
     return_time = models.DateTimeField(auto_now_add=False,blank=True,editable=True,null=True)
+    paid = models.BooleanField(default=False,editable=True)
+    is_late = models.BooleanField(default=True,editable=True)
     mailSend = models.BooleanField(default=False)

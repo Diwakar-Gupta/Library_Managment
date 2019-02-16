@@ -127,7 +127,7 @@ def payable(request,userid):
 
 
 def Index(request):
-    return HttpResponse(render(request,'lm/Form.html',context={'user':True}))
+    return HttpResponse(render(request,'lm/Form.html',context={'user':False}))
 
 
 def profileForm(request,who):
@@ -167,6 +167,9 @@ def addBook(request):
 
         identity = dic.get('identity')
         barcode = dic.get('barcode') if 'barcode' in dic else 0
+        if not barcode:
+            barcode = 0
+
         classification_number = dic.get('classification_number') if 'classification_number' in dic else 0
         active = dic.get('isactive') if 'isactive' in dic else True
 
