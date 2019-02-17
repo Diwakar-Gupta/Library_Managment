@@ -1,1 +1,64 @@
-all books
+{% extends 'lm/base.html' %}
+
+
+{%block title %}Books{% endblock %}
+
+{% block body %}
+
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Identity</th>
+        <th>Active</th>
+        <th>Issued</th>
+      </tr>
+    </thead>
+     <tbody id="myTable" >
+
+
+     {% for b in object_list %}
+
+      <tr>
+          <td><a href="{% url 'lm:book' b.pk %}" >{{b.identity }}</a></td>
+          <td>{{b.active }}</td>
+          <td>{{ b.currently_issued }}</td>
+      </tr>
+{% endfor %}
+
+
+
+     </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

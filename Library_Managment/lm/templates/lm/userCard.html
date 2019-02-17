@@ -16,7 +16,7 @@
 
 
   <div class="col" data-toggle="modal" data-target="#edit">
-    <img src="{% static 'svg/tools.svg' %}">
+    <img class="btn btn-primary" src="{% static 'svg/tools.svg' %}">
   </div>
 
 
@@ -93,7 +93,7 @@
 
 
   <div class="col" data-toggle="modal" data-target="#addb">
-    <img src="{% static 'svg/diff-added.svg' %}">
+    <img class="btn btn-primary" src="{% static 'svg/diff-added.svg' %}">
   </div>
 
 
@@ -130,9 +130,8 @@
 
 
       {% endif %}
-
-                <div class="col" >
-    {% if student.is_active %} <img src="{% static 'svg/check.svg' %}">
+          <div class="col" >
+    {% if student.is_active %} <img  src="{% static 'svg/check.svg' %}">
       {% else %}  <img src="{% static 'svg/circle-slash.svg' %}">
       {% endif %}
   </div>

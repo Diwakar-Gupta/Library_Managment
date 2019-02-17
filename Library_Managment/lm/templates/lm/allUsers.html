@@ -1,1 +1,68 @@
-all users
+{% extends 'lm/base.html' %}
+
+
+{%block title %}Books{% endblock %}
+
+{% block body %}
+
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Roll</th>
+        <th>Email</th>
+          <th>Status</th>
+          <th>Book Count</th>
+      </tr>
+    </thead>
+     <tbody id="myTable" >
+
+
+     {% for u in object_list %}
+
+      <tr>
+          <td>{{u.name }}</td>
+          <td><a href="{% url 'lm:user' u.pk %}" >{{u.roll }}</a></td>
+          <td>{{ u.email }}</td>
+          <td>{%if u.is_active %}Active{%else%}Deactivated{%endif%}</td>
+          <td>{{ u.bookCount }}</td>
+      </tr>
+{% endfor %}
+
+
+
+     </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -298,12 +298,17 @@ def updateBook(request):
     else :
         return HttpResponse(render(request, 'lm/error.html', context={'error':'Cant update'}))
 
+
 class Users(generic.ListView):
-    model = Student
     template_name = 'lm/allUsers.html'
+
+    def get_queryset(self):
+        return Student.objects.all()
 
 
 class Books(generic.ListView):
-    model = Student
     template_name = 'lm/allBooks.html'
+
+    def get_queryset(self):
+        return Book.objects.all()
 

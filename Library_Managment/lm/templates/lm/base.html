@@ -116,8 +116,8 @@
   <a href="{% url 'lm:index' %}">Home</a>
   <a href="{% url 'lm:pendingbooks' %}">Pending Books</a>
   <a href="{% url 'lm:pendingfines' %}">Pending Fines</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <a href="{% url 'lm:alluser' %}">Users</a>
+  <a href="{% url 'lm:allbook' %}">Books</a>
     <form class="form-inline" action="{% url 'lm:searchuser' %}"  method="POST" >
                   {% csrf_token %}
     <input class="form-control mr-sm-2" type="number" name="user" placeholder="User">
