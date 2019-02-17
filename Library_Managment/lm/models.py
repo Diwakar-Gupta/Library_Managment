@@ -40,10 +40,9 @@ class Book(models.Model):
         return reverse('lm:book', kwargs={'pk': self.id})
 
 
-
 class Issue(models.Model):
-    user = models.ForeignKey(Student,on_delete=models.DO_NOTHING)
-    book = models.ForeignKey(Book,on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(Student,on_delete=models.CASCADE,null=True)
+    book = models.ForeignKey(Book,on_delete=models.CASCADE,null=True,)
     issue_time = models.DateTimeField(auto_now_add=True,blank=True,editable=True)
     is_returned = models.BooleanField(default=False,editable=True)
     return_time = models.DateTimeField(auto_now_add=False,blank=True,editable=True,null=True)

@@ -9,7 +9,7 @@ urlpatterns = [
     path('',views.Index,name ='index'),
 
     path('user/<int:userid>', views.StudentDetail, name='user'),
-    path('book/<int:pk>', views.BookDetail.as_view(), name='book'),
+    path('book/<int:pk>', views.BookDetail, name='book'),
 
     path('payable/<int:userid>', views.payable, name='payable'),
     path('pendingBooks/',views.PendingBooks.as_view(),name='pendingbooks'),

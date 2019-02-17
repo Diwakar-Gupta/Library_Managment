@@ -27,6 +27,8 @@ def issueThis(request,userpk,bookpk):
             return StudentDetail(request,user.pk,context={'error':'Already Have Books'})
         if not user.exist :
             return StudentDetail(request, user.pk, context={'error': 'User left Colledge'})
+        if not book.active:
+            return StudentDetail(request, user.pk, context={'error': 'Book is not active'})
     except Http404:
         return HttpResponse(render(request,'lm/error.html',context={'error':"can't issue book problem occured "}))
     else :
@@ -216,9 +218,14 @@ class PendingFines(generic.ListView):
         return [information(b,libSetting.daysLeft(b)) for b in Issue.objects.all().filter(is_returned = True) if libSetting.daysLeft(b) > libSetting.getday(b.user.is_student) ]
 
 
-class BookDetail(generic.DetailView):
-    model = Book
-    template_name = 'lm/bookDetail.html'
+def BookDetail(request,pk,context={}):
+    try:
+        b=get_object_or_404(Book,pk=pk)
+    except Http404:
+        return HttpResponse(render(request, 'lm/error.html', context={'error': 'Book does not exist'}))
+    else:
+        context['book'] = b
+        return HttpResponse(render(request,'lm/bookDetail.html',context))
 
 
 def updateStudent(request):
@@ -227,7 +234,7 @@ def updateStudent(request):
         print(dic)
         roll = dic.get('roll')
         s=get_object_or_404(Student,roll=roll)
-
+        stud = s.is_student
         name = dic.get('name') if 'name' in dic else ''
         if name:
             s.name = name
@@ -249,6 +256,14 @@ def updateStudent(request):
 
         s.is_active = is_active
         s.save()
+        if stud and not s.is_student:
+            sett.total_student -= 1
+            sett.total_staff += 1
+            sett.save()
+        if not stud and s.is_student:
+            sett.total_student += 1
+            sett.total_staff -= 1
+            sett.save()
         return HttpResponseRedirect(reverse('lm:user', kwargs={'userid': s.pk}))
     except Http404:
         print('exception')

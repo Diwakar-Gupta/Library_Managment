@@ -23,23 +23,33 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Edit Profile</h4>
+          <h4 class="modal-title">Edit {{ book.identity }}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
         <!-- Modal body -->
         <div class="modal-body">
           <div class="card-body">
-            <h5 class="card-title text-center">Update Book</h5>
             <form class="form-signin" action="{% url 'lm:updatebook' %}" method="post" >
               {% csrf_token %}
 
-              <input type="hidden"  name="identity" value="{{ book.identity }}" ></input>
+              <div class="form-label-group">
+                <input name="identity" value="{{ book.identity }}" type="hidden" contenteditable="false" ></input>
+              </div>
 
               <div class="form-label-group">
-                <label for="inputname"></label>
-                <input value="{{student.name}}" name="name" type="text" id="inputname" class="form-control" placeholder="Name" required="" autofocus="">
+                <input type="number" id="inputbarcode" value={{book.barcode}} name="barcode" class="form-control" placeholder="Barcode" >
+                <label for="inputbarcode">Barcode</label>
               </div>
+
+              <div class="form-label-group">
+                <input type="number" min="10000" max="999999" value={{book.classification_number}} name="classification_number" id="inputclassification_number" class="form-control" placeholder="Classification" >
+                <label for="inputclassification_number">Classification</label>
+              </div>
+
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" {% if book.active%}checked="checked"{%endif%} id="customCheck1">
+                <label class="custom-control-label" name="isactive" for="customCheck1">Active</label>
 
                 <!-- body over here -->
 
