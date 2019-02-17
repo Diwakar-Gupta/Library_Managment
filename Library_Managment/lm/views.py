@@ -277,17 +277,18 @@ def updateBook(request):
     dic = request.POST
     try :
         print(dic)
-        identity = dic.get('roll')
+        identity = dic.get('identity')
         s=get_object_or_404(Book,identity=identity)
 
         barcode = dic.get('barcode') if 'barcode' in dic else 0
-        if barcode:
+        if not barcode:
             s.barcode = 0
-        classification_number = dic.get('classification') if 'classification' in dic else 0
-        if classification_number:
+        classification_number = dic.get('classification_number') if 'classification_number' in dic else 0
+        if not classification_number:
             s.classification_number = classification_number
         is_active = True if 'isactive' in dic and 'on'==dic.get('isactive') else False
-
+        s.barcode=barcode
+        s.classification_number=classification_number
         s.active = is_active
         s.save()
         return HttpResponseRedirect(reverse('lm:book', kwargs={'pk': s.pk}))

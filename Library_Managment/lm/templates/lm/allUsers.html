@@ -29,6 +29,7 @@ $(document).ready(function(){
         <th>Email</th>
           <th>Status</th>
           <th>Book Count</th>
+          <th></th>
       </tr>
     </thead>
      <tbody id="myTable" >
@@ -42,6 +43,7 @@ $(document).ready(function(){
           <td>{{ u.email }}</td>
           <td>{%if u.is_active %}Active{%else%}Deactivated{%endif%}</td>
           <td>{{ u.bookCount }}</td>
+          <td>{%if u.is_student %}Student{% else %}Faculty{% endif %}</td>
       </tr>
 {% endfor %}
 

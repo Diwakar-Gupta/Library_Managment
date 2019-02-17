@@ -11,7 +11,7 @@
 
             <div class="row">
 
-<div class="col">
+
   <div class="col" data-toggle="modal" data-target="#edit">
     <img class="btn btn-primary" src="{% static 'svg/tools.svg' %}">
   </div>
@@ -38,18 +38,18 @@
               </div>
 
               <div class="form-label-group">
-                <input type="number" id="inputbarcode" value={{book.barcode}} name="barcode" class="form-control" placeholder="Barcode" >
+                <input type="number" id="inputbarcode" value={{ book.barcode }} name="barcode" class="form-control" placeholder="Barcode" >
                 <label for="inputbarcode">Barcode</label>
               </div>
 
               <div class="form-label-group">
-                <input type="number" min="10000" max="999999" value={{book.classification_number}} name="classification_number" id="inputclassification_number" class="form-control" placeholder="Classification" >
+                <input type="number" min="10000" max="999999" value={{ book.classification_number }} name="classification_number" id="inputclassification_number" class="form-control" placeholder="Classification" >
                 <label for="inputclassification_number">Classification</label>
               </div>
 
               <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" {% if book.active%}checked="checked"{%endif%} id="customCheck1">
-                <label class="custom-control-label" name="isactive" for="customCheck1">Active</label>
+                <input type="checkbox" name="isactive" class="custom-control-input" {% if book.active%}checked="checked"{%endif%} id="customCheck1">
+                <label class="custom-control-label"  for="customCheck1">Active</label>
 
                 <!-- body over here -->
 
@@ -64,14 +64,14 @@
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
 
-      </div>
+
     </div>
   </div>
 </div>
 
-            {% if book.active  %}
 
-<div class="col">
+</div>
+{% if book.active  %}
   <div class="col" data-toggle="modal" data-target="#addb">
     <img class="btn btn-primary" src="{% static 'svg/diff-added.svg' %}">
   </div>
@@ -107,15 +107,16 @@
     </div>
   </div>
 
-</div>
+
 
       {% endif %}
 
                 <div class="col" >
     {% if book.active %} <img src="{% static 'svg/check.svg' %}">
+
       {% else %}  <img src="{% static 'svg/circle-slash.svg' %}">
       {% endif %}
-  </div>
+ </div>
 
 </div>
 
