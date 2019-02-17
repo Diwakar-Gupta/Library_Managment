@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 app_name='lm'
 urlpatterns = [
@@ -24,8 +27,13 @@ urlpatterns = [
     path('addUser',views.addUser,name='adduser'),
     path('addBook',views.addBook,name='addbook'),
 
-    path('add/<int:who>',views.profileForm,name='create'),
+    path('Create/user',views.userForm,name='createuser'),
+    path('Create/book',views.bookForm,name='createbook'),
 
     path('update/user/',views.updateStudent,name='updateuser'),
     path('update/book/',views.updateBook,name='updatebook'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

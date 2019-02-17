@@ -34,7 +34,7 @@
         <div class="modal-body">
           <div class="card-body">
             <h5 class="card-title text-center">Update User</h5>
-            <form class="form-signin" action="{% url 'lm:updateuser' %}" method="post" >
+            <form enctype="multipart/form-data" class="form-signin" action="{% url 'lm:updateuser' %}" method="post" >
               {% csrf_token %}
 
               <div class="form-label-group">
@@ -68,7 +68,7 @@
               </div>
 
               <div class="form-label-group">
-                <input name="image" type="file" accept="image/*" id="inputImage" class="form-control" placeholder="Name"  autofocus="">
+                <input name="image" type="file" accept="image/*" id="inputImage" class="form-control" placeholder="Image"  autofocus="">
                  <label for="inputImage">Image</label>
               </div>
 

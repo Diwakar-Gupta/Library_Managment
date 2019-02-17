@@ -5,6 +5,7 @@ from . import libSetting
 from django.http import HttpResponse , HttpResponseRedirect
 from django.http.response import Http404
 import datetime
+from django.core.files.storage import FileSystemStorage
 
 
 sett = LibrarySettings.objects.all()[0]
@@ -127,14 +128,15 @@ def payable(request,userid):
 
 
 def Index(request):
-    return HttpResponse(render(request,'lm/userForm.html',context={'user':False}))
+    return HttpResponse(render(request,'lm/index.html',context={'user':False}))
 
 
-def profileForm(request,who):
-    user = True if who else False
+def userForm(request):
+    return HttpResponse(render(request,'lm/userForm.html'))
 
-    return HttpResponse(render(request,'lm/userForm.html',context={'user':user}))
 
+def bookForm(request):
+    return HttpResponse(render(request, 'lm/bookForm.html'))
 
 def addUserform(request):
     return HttpResponse(render(request,'lm/userForm.html'))
@@ -151,9 +153,6 @@ def addUser(request):
         name = dic.get('name') if 'name' in dic else ''
         roll = dic.get('roll')
         email = dic.get('email')
-        image = dic.get('image') if 'image' in dic else '../static/lm/anon.png'
-        if not image:
-            image='../static/lm/anon.png'
         student = False if 'isstudent'in dic and 'off'== dic.get('isstudent')  else True
         active = False if 'isactive'in dic and 'off'== dic.get('isactive')  else True
         exist = False if 'exist'in dic and 'off'== dic.get('exist')  else True
@@ -161,7 +160,13 @@ def addUser(request):
         s=get_object_or_404(Student,roll=roll)
         return StudentDetail(request,userid=s.pk,context={'error':'user already exists'})
     except Http404:
-        s = Student(name=name, roll=roll, image_path=image,email=email, is_student=student, is_active=active, exist=exist,bookCount=0, payable_amount=0)
+        s = Student(name=name, roll=roll, email=email, is_student=student, is_active=active, exist=exist,bookCount=0, payable_amount=0)
+        if request.FILES and request.FILES['image']:
+            image = request.FILES['image']
+            fs = FileSystemStorage()
+            filename = fs.save(str(s.roll), image)
+            uploaded_file_url = fs.url(filename)
+            s.image_path = uploaded_file_url
         s.save()
         if student:
             sett.total_student += 1
@@ -226,9 +231,14 @@ def updateStudent(request):
         name = dic.get('name') if 'name' in dic else ''
         if name:
             s.name = name
-        image_path = dic.get('image') if 'image' in dic else ''
-        if image_path:
-            s.image_path = image_path
+
+        if request.FILES and request.FILES['image']:
+            image = request.FILES['image']
+            fs = FileSystemStorage()
+            filename = fs.save(str(s.roll), image)
+            uploaded_file_url = fs.url(filename)
+            s.image_path = uploaded_file_url
+
         email = dic.get('email') if 'email' in dic else ''
         if email:
             s.email = email
@@ -245,9 +255,30 @@ def updateStudent(request):
         return HttpResponse(render(request,'lm/error.html',context={'error':'user does not exist'}))
 
     else :
-        return HttpResponse(render(request, 'lm/error.html', context=context))
+        return HttpResponse(render(request, 'lm/error.html', context={'error':'Cant update'}))
 
 
 def updateBook(request):
-    return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':request.POST.get('pk')}))
+    dic = request.POST
+    try :
+        print(dic)
+        identity = dic.get('roll')
+        s=get_object_or_404(Book,identity=identity)
 
+        barcode = dic.get('barcode') if 'barcode' in dic else 0
+        if barcode:
+            s.barcode = 0
+        classification_number = dic.get('classification') if 'classification' in dic else 0
+        if classification_number:
+            s.classification_number = classification_number
+        is_active = True if 'isactive' in dic and 'on'==dic.get('isactive') else False
+
+        s.active = is_active
+        s.save()
+        return HttpResponseRedirect(reverse('lm:book', kwargs={'pk': s.pk}))
+    except Http404:
+        print('exception')
+        return HttpResponse(render(request,'lm/error.html',context={'error':'book does not exist'}))
+
+    else :
+        return HttpResponse(render(request, 'lm/error.html', context={'error':'Cant update'}))
