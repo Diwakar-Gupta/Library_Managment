@@ -30,6 +30,9 @@ urlpatterns = [
     path('Create/user',views.userForm,name='createuser'),
     path('Create/book',views.bookForm,name='createbook'),
 
+    path('Alluser' , views.Users.as_view() , name='alluser'),
+    path('Allbook', views.Books.as_view() , name='allbook'),
+
     path('update/user/',views.updateStudent,name='updateuser'),
     path('update/book/',views.updateBook,name='updatebook'),
 ]
