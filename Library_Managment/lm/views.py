@@ -204,7 +204,7 @@ def addBook(request):
 
 
 class PendingBooks(generic.ListView):
-    context_object_name = 'pendingIssue'
+    template_name = 'lm/pendingIssue.html'
 
     def get_queryset(self):
         return Issue.objects.all().filter(is_returned = False)

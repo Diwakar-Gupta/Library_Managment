@@ -1,9 +1,10 @@
 {% extends 'lm/base.html' %}
 
-{% block title %}index page title{% endblock %}
+{% block title %}Pending{% endblock %}
 
 
 {% block body %}
+
 
 <script>
 $(document).ready(function(){
@@ -25,22 +26,25 @@ $(document).ready(function(){
         <th>Roll</th>
         <th>Book ID</th>
         <th>Issue Date</th>
-        <th>Return Status</th>
+        <th></th>
+        <th>Extended Days</th>
       </tr>
     </thead>
      <tbody id="myTable" >
-{% for issue in pendingIssue %}
+{% for issue in object_list %}
 
       <tr>
           <td>{{issue.user.name }}</td>
           <td><a href="{% url 'lm:user' issue.user.pk %}" >{{issue.user.roll }}</a></td>
           <td><a href="{% url 'lm:book' issue.book.pk %}" >{{issue.book.identity }}</a></td>
         <td>{{issue.issue_time }}</td>
-        <td>{{issue.is_returned }}</td>
+        <td>{{issue.return_time }}</td>
+        <td>{{ issue.dayLeft }}</td>
       </tr>
 {% endfor %}
 
      </tbody>
   </table>
+
 
 {% endblock %}
