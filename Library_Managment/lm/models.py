@@ -7,16 +7,17 @@ class LibrarySettings(models.Model):
     maxDelayDayFaculty = models.IntegerField(default=182)
     revenuePerDayStudent = models.IntegerField(default=10)
     revenuePerDayFaculty = models.IntegerField(default=10)
-    total_Books = models.IntegerField(default=1000,editable=True)
-    total_student = models.IntegerField(default=1000,editable=True)
-    total_staff = models.IntegerField(default=1000,editable=True)
+    total_Books = models.IntegerField(default=0,editable=True)
+    total_student = models.IntegerField(default=000,editable=True)
+    total_staff = models.IntegerField(default=000,editable=True)
     maxBookForStudent = models.IntegerField(default=2)
     maxBookForFaculty = models.IntegerField(default=3)
+    total_issued = models.IntegerField(default=0,editable=True)
 
 
 class Student(models.Model):
     name = models.CharField(max_length=30,default=' ',editable=True)
-    roll = models.IntegerField(editable=False,primary_key=True)
+    roll = models.IntegerField(editable=True,primary_key=True)
     image_path = models.ImageField(default='../static/lm/anon.png',editable=True)
     email = models.EmailField(blank=True,editable=True)
     payable_amount = models.IntegerField(default=0,editable=True)
@@ -30,14 +31,13 @@ class Student(models.Model):
 
 
 class Book(models.Model):
-    identity = models.IntegerField(primary_key=True,editable=False)
-    barcode = models.IntegerField(default=0,blank=True,null=True,editable=True)
+    barcode = models.IntegerField(default=0,primary_key=True,editable=True,)
     classification_number = models.IntegerField(default=0,null=True,blank=True,editable=True)
     currently_issued = models.BooleanField(default=False,editable=True,null=False,blank=False)
     active = models.BooleanField(default=True,editable=True)
 
     def get_absolute_url(self):
-        return reverse('lm:book', kwargs={'pk': self.id})
+        return reverse('lm:book', kwargs={'pk': self.pk})
 
 
 class Issue(models.Model):

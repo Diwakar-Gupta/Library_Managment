@@ -32,14 +32,18 @@ def issueThis(request,userpk,bookpk):
     except Http404:
         return HttpResponse(render(request,'lm/error.html',context={'error':"can't issue book problem occured "}))
     else :
-        iss = Issue(user = user,book = book ,is_returned = False ,issue_time=datetime.datetime.now())
+        iss = Issue(user = user,book = book ,is_returned = False )
         days = sett.maxDelayDayStudent if user.is_student else sett.maxDelayDayFaculty
-        iss.return_time = iss.issue_time.date()+datetime.timedelta(days = days)
         book.currently_issued = True
+        iss.issue_time = datetime.datetime.now()
+        iss.return_time = iss.issue_time.date() + datetime.timedelta(days=days)
         user.bookCount += 1
         user.save()
         book.save()
         iss.save()
+
+        sett.total_issued += 1
+        sett.save()
         return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':user.pk}))
 
 
@@ -50,7 +54,7 @@ def issuee(request):
     bookpk = -1
     try :
         userpk = dic.get('userpk') if 'userpk' in dic else get_object_or_404(Student,roll=dic.get('userroll')).pk if 'userroll' in dic else -1
-        bookpk = dic.get('bookpk') if 'bookpk' in dic else get_object_or_404(Book,identity=dic.get('identity')).pk if 'identity' in dic else get_object_or_404(Book,barcode=dic.get('barcode')).pk if 'barcode' in dic else -1
+        bookpk = dic.get('bookpk') if 'bookpk' in dic else get_object_or_404(Book,barcode=dic.get('barcode')).pk if 'barcode' in dic else get_object_or_404(Book,barcode=dic.get('barcode')).pk if 'barcode' in dic else -1
     except Http404:
         if userpk == -1:
             return HttpResponse(
@@ -71,28 +75,31 @@ def returnbook(request,issue_id):
     info = Issue.objects.get(pk = issue_id)
     book = info.book
     user = info.user
-    context = {'issue':info}
-    delayedby = libSetting.daysLeft(info) - libSetting.getday(info.user.is_student)
-    if delayedby > 0:
-        context['showDate'] = True
-        user.payable_amount += delayedby*libSetting.getcost(info.user.is_student)
+    if not info.is_returned:
+        context = {'issue': info}
+        delayedby = libSetting.daysLeft(info) - libSetting.getday(info.user.is_student)
+        if delayedby > 0:
+            context['showDate'] = True
+            user.payable_amount += delayedby * libSetting.getcost(info.user.is_student)
+            user.save()
+        info.is_returned = True
+        info.return_time = datetime.datetime.now()
+        book.currently_issued = False
+        user.bookCount -= 1
+        if user.bookCount < 0:
+            user.bookCount = 0
         user.save()
-    info.is_returned = True
-    info.return_time = datetime.datetime.now()
-    book.currently_issued = False
-    user.bookCount -= 1
-    if user.bookCount <0:
-        user.bookCount = 0
-    user.save()
-    info.save()
-    book.save()
+        info.save()
+        book.save()
+        sett.total_issued -= 1
+        sett.save()
     return HttpResponseRedirect(reverse('lm:user',kwargs={'userid':user.pk}))
 
 
 def searchBook(request):
     id = request.POST.get('book')
     try :
-        book = get_object_or_404(Book,identity = id)
+        book = get_object_or_404(Book,barcode = id)
     except Http404:
         return HttpResponse(render(request,'lm/error.html', context={'error':"book does not exist"}))
     else :
@@ -184,19 +191,17 @@ def addBook(request):
     try :
         dic = request.POST
         print(dic)
-        identity = int(dic.get('identity'))
-        barcode = dic.get('barcode') if 'barcode' in dic else 0
-        if not barcode:
-            barcode=0
+        barcode = int(dic.get('barcode'))
+
         classification_number = dic.get('classification_number') if 'classification_number' in dic else 0
         if not classification_number:
             classification_number=0
         active = False if 'isactive'in dic and 'off'== dic.get('isactive')  else True
 
-        s=Book.objects.get(identity=identity)
+        s=get_object_or_404(Book,barcode=barcode)
         return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':s.pk}))
-    except Book.DoesNotExist:
-        s = Book(identity=identity,barcode=barcode,classification_number=classification_number,currently_issued=False, active=active)
+    except :
+        s = Book(barcode=barcode,classification_number=classification_number)
         s.save()
         sett.total_Books += 1
         sett.save()
@@ -233,7 +238,7 @@ def updateStudent(request):
     try :
         print(dic)
         roll = dic.get('roll')
-        s=get_object_or_404(Student,roll=roll)
+        s=get_object_or_404(Student,pk=roll)
         stud = s.is_student
         name = dic.get('name') if 'name' in dic else ''
         if name:
@@ -277,10 +282,9 @@ def updateBook(request):
     dic = request.POST
     try :
         print(dic)
-        identity = dic.get('identity')
-        s=get_object_or_404(Book,identity=identity)
+        barcode = dic.get('barcode')
+        s=get_object_or_404(Book,pk=barcode)
 
-        barcode = dic.get('barcode') if 'barcode' in dic else 0
         if not barcode:
             s.barcode = 0
         classification_number = dic.get('classification_number') if 'classification_number' in dic else 0
