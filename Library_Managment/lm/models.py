@@ -14,6 +14,11 @@ class LibrarySettings(models.Model):
     maxBookForFaculty = models.IntegerField(default=3)
     total_issued = models.IntegerField(default=0,editable=True)
 
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
+
 
 class Student(models.Model):
     name = models.CharField(max_length=30,default=' ',editable=True)

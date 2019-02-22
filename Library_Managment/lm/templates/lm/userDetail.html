@@ -34,7 +34,7 @@
      {% for issue in books %}
 
       <tr>
-          <td><a href="{% url 'lm:book' issue.issue.book.pk %}" >{{issue.issue.book.identity }}</a></td>
+          <td><a href="{% url 'lm:book' issue.issue.book.pk %}" >{{issue.issue.book.barcode }}</a></td>
           <td>{{issue.issue.issue_time }}</td>
           <td>{{issue.dayLeft}}</td>
         <td>{{ issue.is_returned }}</td>

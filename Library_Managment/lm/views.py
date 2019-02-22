@@ -8,7 +8,7 @@ import datetime
 from django.core.files.storage import FileSystemStorage
 
 
-sett = LibrarySettings.objects.all()[0]
+sett = LibrarySettings.load()
 
 
 class information():

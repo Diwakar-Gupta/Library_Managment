@@ -24,7 +24,7 @@ $(document).ready(function(){
 <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Identity</th>
+        <th>Barcode</th>
         <th>Active</th>
         <th>Issued</th>
       </tr>
@@ -35,7 +35,7 @@ $(document).ready(function(){
      {% for b in object_list %}
 
       <tr>
-          <td><a href="{% url 'lm:book' b.pk %}" >{{b.identity }}</a></td>
+          <td><a href="{% url 'lm:book' b.pk %}" >{{b.barcode }}</a></td>
           <td>{{b.active }}</td>
           <td>{{ b.currently_issued }}</td>
       </tr>

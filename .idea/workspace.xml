@@ -3,22 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="61e447c7-c3ba-4622-8f89-8f3e1af210f0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_Managment/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Library_Managment/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_Managment/lm/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library_Managment/lm/libSetting.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_Managment/lm/libSetting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0002_auto_20190216_0325.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0003_auto_20190216_0326.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0004_issue.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0005_remove_book_user.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0006_student_bookcount.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0007_issue_mailsend.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0008_book_active.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0009_auto_20190216_1307.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0010_auto_20190216_1508.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0011_auto_20190217_0555.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0012_auto_20190217_0559.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0013_auto_20190217_0601.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library_Managment/lm/migrations/0014_auto_20190217_0603.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Library_Managment/lm/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_Managment/lm/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library_Managment/lm/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library_Managment/lm/views.py" afterDir="false" />
     </list>
@@ -29,7 +16,62 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Library_Managment/lm/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Library_Managment/lm/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Library_Managment/lm/libSetting.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Library_Managment/lm/templates/lm/bookDetail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Library_Managment/lm/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -71,13 +113,14 @@
         <option value="$PROJECT_DIR$/Library_Managment/lm/templates/lm/error.html" />
         <option value="$PROJECT_DIR$/Library_Managment/lm/templates/lm/userCard.html" />
         <option value="$PROJECT_DIR$/Library_Managment/lm/templates/lm/index.html" />
+        <option value="$PROJECT_DIR$/Library_Managment/lm/admin.py" />
         <option value="$PROJECT_DIR$/Library_Managment/lm/models.py" />
-        <option value="$PROJECT_DIR$/Library_Managment/lm/libSetting.py" />
         <option value="$PROJECT_DIR$/Library_Managment/lm/views.py" />
+        <option value="$PROJECT_DIR$/Library_Managment/lm/libSetting.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="1" />
     <option name="width" value="683" />
     <option name="height" value="766" />
@@ -90,6 +133,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -108,16 +152,36 @@
               <item name="Library_Managment" type="462c0819:PsiDirectoryNode" />
               <item name="lm" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Library_Managment" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Library_Managment" type="462c0819:PsiDirectoryNode" />
+              <item name="Library_Managment" type="462c0819:PsiDirectoryNode" />
+              <item name="lm" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Library_Managment" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Library_Managment" type="462c0819:PsiDirectoryNode" />
+              <item name="Library_Managment" type="462c0819:PsiDirectoryNode" />
+              <item name="lm" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="lm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Library_Managment" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Library_Managment" type="462c0819:PsiDirectoryNode" />
+              <item name="Library_Managment" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -214,21 +278,36 @@
       <option name="project" value="LOCAL" />
       <updated>1550309697978</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="dayleft solved">
+      <created>1550857079933</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1550857079933</updated>
+    </task>
+    <task id="LOCAL-00011" summary="dayleft solved">
+      <created>1550857101759</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1550857101759</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="1" width="683" height="766" extended-state="4" />
+    <frame x="0" y="-3" width="1366" height="770" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.38636363" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.19434103" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.36220473" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.36150235" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" weight="0.3286385" />
-      <window_info anchor="bottom" id="Python Console" order="2" />
+      <window_info anchor="bottom" id="Python Console" order="2" weight="0.3286385" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.32913387" />
-      <window_info anchor="bottom" id="Version Control" order="5" weight="0.33070865" />
+      <window_info anchor="bottom" id="Version Control" order="5" weight="0.3286385" />
       <window_info anchor="bottom" id="Run" order="6" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
@@ -302,7 +381,8 @@
     <MESSAGE value="issue max limit" />
     <MESSAGE value="boo detail updated" />
     <MESSAGE value="error page" />
-    <option name="LAST_COMMIT_MESSAGE" value="error page" />
+    <MESSAGE value="dayleft solved" />
+    <option name="LAST_COMMIT_MESSAGE" value="dayleft solved" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Library_Managment/Library_Managment/urls.py">
@@ -314,13 +394,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Library_Managment/lm/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_Managment/Library_Managment/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Library_Managment/lm/templates/lm/Issue_list.html" />
     <entry file="file://$PROJECT_DIR$/Library_Managment/lm/templates/lm/userDetail.html">
@@ -345,13 +418,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Library_Managment/lm/static/error/back.jpeg" />
-    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/templates/lm/bookDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Library_Managment/lm/templates/lm/error.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
@@ -362,37 +428,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/libSetting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="319" selection-start-line="319" selection-end-line="319" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Library_Managment/lm/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="21" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -438,6 +477,60 @@
             <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" />
             <element signature="n#div#3;n#div#0;n#div#0;n#div#0;n#!!top" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/static/lm/anon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library_Managment/Library_Managment/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/libSetting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library_Managment/lm/templates/lm/bookDetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
         </state>
       </provider>
     </entry>

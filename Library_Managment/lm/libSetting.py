@@ -1,7 +1,7 @@
 import datetime
 from .models import *
 
-sett = LibrarySettings.objects.get(id=1)
+sett = LibrarySettings.load()
 
 def getcost(b):
     if b:
