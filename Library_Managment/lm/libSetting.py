@@ -22,5 +22,6 @@ def daysLeft(r):
         return d.days
     else:
         d = datetime.date.today() - r.issue_time.date()
-        return sett.maxDelayDayStudent if r.user.is_student else sett.maxDelayDayFaculty - d.days
-
+        d = d.days
+        return (sett.maxDelayDayStudent if r.user.is_student else sett.maxDelayDayFaculty) - d
+    
