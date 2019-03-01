@@ -1,5 +1,5 @@
 from django.views import generic
-from .models import Student , Book , Issue , LibrarySettings
+from .models import *
 from django.shortcuts import reverse ,render , get_object_or_404
 from . import libSetting
 from django.http import HttpResponse , HttpResponseRedirect
@@ -32,7 +32,7 @@ def issueThis(request,userpk,bookpk):
     except Http404:
         return HttpResponse(render(request,'lm/error.html',context={'error':"can't issue book problem occured "}))
     else :
-        iss = Issue(user = user,book = book ,is_returned = False )
+        iss = Issue(user = user,book = book ,day = event_day.load() ,is_returned = False )
         days = sett.maxDelayDayStudent if user.is_student else sett.maxDelayDayFaculty
         book.currently_issued = True
         iss.issue_time = datetime.datetime.now()

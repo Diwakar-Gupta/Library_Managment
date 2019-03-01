@@ -23,7 +23,7 @@
 
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Edit {{ book.identity }}</h4>
+          <h4 class="modal-title">Edit {{ book.barcode }}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
@@ -34,18 +34,14 @@
               {% csrf_token %}
 
               <div class="form-label-group">
-                <input name="identity" value="{{ book.identity }}" type="hidden" contenteditable="false" ></input>
+                <input name="barcode"  value="{{ book.barcode }}" type="hidden" contenteditable="false" ></input>
               </div>
 
-              <div class="form-label-group">
-                <input type="number" id="inputbarcode" value={{ book.barcode }} name="barcode" class="form-control" placeholder="Barcode" >
-                <label for="inputbarcode">Barcode</label>
-              </div>
 
-              <div class="form-label-group">
+              <!--div class="form-label-group">
                 <input type="number" min="10000" max="999999" value={{ book.classification_number }} name="classification_number" id="inputclassification_number" class="form-control" placeholder="Classification" >
                 <label for="inputclassification_number">Classification</label>
-              </div>
+              </div-->
 
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" name="isactive" class="custom-control-input" {% if book.active%}checked="checked"{%endif%} id="customCheck1">
