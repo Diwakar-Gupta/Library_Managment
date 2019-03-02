@@ -23,7 +23,7 @@ def issueThis(request,userpk,bookpk):
         book = get_object_or_404(Book, pk=bookpk)
         if book.currently_issued:
             return HttpResponseRedirect(reverse('lm:book',kwargs={'pk':book.pk}))
-        if user.bookCount >= sett.maxBookForStudent if user.is_student else sett.maxBookForFaculty:
+        if user.bookCount >= (sett.maxBookForStudent if user.is_student else sett.maxBookForFaculty):
             return StudentDetail(request,user.pk,context={'error':'Already Have Books'})
         if not user.exist :
             return StudentDetail(request, user.pk, context={'error': 'User left Colledge'})
