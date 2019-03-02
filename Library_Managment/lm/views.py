@@ -233,6 +233,11 @@ def BookDetail(request,pk,context={}):
         return HttpResponse(render(request,'lm/bookDetail.html',context))
 
 
+def status(request):
+    return render(request,'lm/status.html',context={'sett':sett})
+
+
+
 def updateStudent(request):
     dic = request.POST
     try :

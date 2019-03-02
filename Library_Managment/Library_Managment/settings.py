@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=dzq2m!dy$f&&qt(doh@yzjc54ydcqzqjphkul7gnuq)h&b6sn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -127,7 +127,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = 1
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'fbuttowski814@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = "[];',./"+'?><":}{plm1234567890'
 
 #EMAIL_USE_SSL = False
 #DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
