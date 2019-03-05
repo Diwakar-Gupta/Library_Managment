@@ -132,8 +132,8 @@ def StudentDetail(request,userid,context={}):
 
 def payable(request,userid):
     student = Student.objects.get(pk=userid)
-    all=[information(a,libSetting.daysLeft(a)) for a in student.Issue_set.all() if a.is_returned and libSetting.daysLeft(a)>libSetting.getday(a.user.is_student) ]
-    return render(request,'lm/payable.html',context={'issuesday':all,'name':student.name,'roll':student.roll})
+    all=[information(a,libSetting.daysLeft(a)) for a in student.issue_set.all() if a.is_returned and libSetting.daysLeft(a)>libSetting.getday(a.user.is_student) ]
+    return HttpResponse(render(request,'lm/payable.html',context={'issuesday':all,'name':student.name,'roll':student.roll}))
 
 
 def Index(request):

@@ -11,7 +11,7 @@
       <tr>
         <th>Book ID</th>
         <th>Issue Date</th>
-        <th>Return Status</th>
+        <th>Return Time</th>
         <th>Late By</th>
       </tr>
     </thead>
@@ -19,9 +19,9 @@
 {% for iss in issuesday %}
 
       <tr>
-          <td><a href="{% url 'lm:book' issue.book.pk %}" >{{iss.issue.book.identity }}</a></td>
+          <td><a href="{% url 'lm:book' iss.issue.book.pk %}" >{{iss.issue.book.barcode }}</a></td>
         <td>{{iss.issue.issue_time }}</td>
-        <td>{{iss.issue.is_returned }}</td>
+        <td>{{iss.issue.return_time }}</td>
         <td>{{iss.dayLeft }}</td>
       </tr>
 {% endfor %}
