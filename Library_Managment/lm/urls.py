@@ -11,7 +11,7 @@ urlpatterns = [
     path('user/<int:userid>', views.StudentDetail, name='user'),
     path('book/<int:pk>', views.BookDetail, name='book'),
 
-    path('payable/<int:userid>', views.payable, name='payable'),
+    path('user/<int:userid>/payable', views.payable, name='payable'),
     path('pendingBooks/',views.PendingBooks.as_view(),name='pendingbooks'),
     path('pendingFines/',views.PendingFines.as_view(),name='pendingfines'),
 
